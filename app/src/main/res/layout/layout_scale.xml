@@ -31,41 +31,54 @@
         android:textColor="@color/colorScale"
         />
 
-    <RelativeLayout
-        android:id="@+id/lines_frame"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
-        android:background="@android:color/transparent">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+      <RelativeLayout
+          android:id="@+id/lines_frame"
+          android:layout_width="100dp"
+          android:layout_height="120dp"
+          android:background="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/horizontal_line_resize"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/dragger_circle"
+            tools:ignore="ContentDescription"/>
+
+        <ImageView
+            android:id="@+id/vertical_line_resize"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/dragger_circle"
+            tools:ignore="ContentDescription"/>
+
+        <ImageView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/vertical_line_resize"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/horizontal_line_resize"
+            android:background="@drawable/arrows"
+            tools:ignore="ContentDescription"/>
+
+      </RelativeLayout>
 
       <ImageView
-          android:id="@+id/horizontal_line_dragger"
-          android:layout_width="8dp"
-          android:layout_height="8dp"
-          android:layout_alignParentEnd="true"
-          android:background="@drawable/dragger_circle"
+          android:id="@+id/drag"
+          android:layout_width="15dp"
+          android:layout_height="15dp"
+          android:layout_gravity="center"
+          android:background="@drawable/drag_icon"
           tools:ignore="ContentDescription"/>
-
-      <ImageView
-          android:id="@+id/vertical_line_dragger"
-          android:layout_width="8dp"
-          android:layout_height="8dp"
-          android:layout_alignParentBottom="true"
-          android:background="@drawable/dragger_circle"
-          tools:ignore="ContentDescription"/>
-
-      <ImageView
-          android:id="@+id/line"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_above="@+id/vertical_line_dragger"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentTop="true"
-          android:layout_toStartOf="@+id/horizontal_line_dragger"
-          android:background="@drawable/arrows"
-          tools:ignore="ContentDescription"/>
-
-    </RelativeLayout>
-
+    </FrameLayout>
 
   </TableRow>
 </TableLayout>
+

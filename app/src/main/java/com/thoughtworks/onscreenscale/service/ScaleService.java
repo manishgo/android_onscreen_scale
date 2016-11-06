@@ -55,13 +55,45 @@ public class ScaleService extends Service {
         verticalLineSize.setText(getResources().getString(R.string.size_in_dp, verticalDp));
       }
     });
-    LayoutParams layoutParams = createLayoutParams();
+    final LayoutParams layoutParams = createLayoutParams();
 
     windowManager.addView(scaleRoot, layoutParams);
 
     final ViewGroup.LayoutParams lineFrameParams = lineFrame.getLayoutParams();
-    ImageView horizontalLineDragger = (ImageView) scaleRoot.findViewById(R.id.horizontal_line_dragger);
-    horizontalLineDragger.setOnTouchListener(new View.OnTouchListener() {
+    handleHorizontalResizing(lineFrameParams);
+    handleVerticalResizing(lineFrameParams);
+
+    View drag = scaleRoot.findViewById(R.id.drag);
+    drag.setOnTouchListener(new View.OnTouchListener() {
+      private int initialX;
+      private int initialY;
+      private float initialTouchX;
+      private float initialTouchY;
+
+      @Override public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+          case MotionEvent.ACTION_DOWN:
+            initialX = layoutParams.x;
+            initialY = layoutParams.y;
+            initialTouchX = event.getRawX();
+            initialTouchY = event.getRawY();
+            return true;
+          case MotionEvent.ACTION_UP:
+            return false;
+          case MotionEvent.ACTION_MOVE:
+            layoutParams.x = initialX + (int) (event.getRawX() - initialTouchX);
+            layoutParams.y = initialY + (int) (event.getRawY() - initialTouchY);
+            windowManager.updateViewLayout(scaleRoot, layoutParams);
+            return true;
+        }
+        return false;
+      }
+    });
+  }
+
+  private void handleHorizontalResizing(final ViewGroup.LayoutParams lineFrameParams) {
+    ImageView horizontalLineResize = (ImageView) scaleRoot.findViewById(R.id.horizontal_line_resize);
+    horizontalLineResize.setOnTouchListener(new View.OnTouchListener() {
       int initialWidth;
       float initialMotionEventX;
 
@@ -84,9 +116,11 @@ public class ScaleService extends Service {
         return false;
       }
     });
+  }
 
-    ImageView verticalLineDragger = (ImageView) scaleRoot.findViewById(R.id.vertical_line_dragger);
-    verticalLineDragger.setOnTouchListener(new View.OnTouchListener() {
+  private void handleVerticalResizing(final ViewGroup.LayoutParams lineFrameParams) {
+    ImageView verticalLineResize = (ImageView) scaleRoot.findViewById(R.id.vertical_line_resize);
+    verticalLineResize.setOnTouchListener(new View.OnTouchListener() {
       int initialHeight;
       float initialMotionEventY;
 
@@ -127,8 +161,6 @@ public class ScaleService extends Service {
         PixelFormat.TRANSLUCENT);
 
     layoutParams.gravity = Gravity.TOP | Gravity.START;
-    layoutParams.x = 100;
-    layoutParams.y = 100;
     return layoutParams;
   }
 }
