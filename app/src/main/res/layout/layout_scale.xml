@@ -1,42 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:background="@android:color/transparent"
-              android:orientation="vertical">
 
-  <TextView
-      android:id="@+id/line_size"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:textColor="@color/colorScale"
-      />
 
-  <LinearLayout
-      android:id="@+id/line_frame"
-      android:layout_width="100dp"
-      android:layout_height="wrap_content"
-      android:background="@android:color/transparent"
-      android:orientation="horizontal">
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
 
-    <ImageView
-        android:id="@+id/line"
-        android:layout_width="0dp"
+  <TableRow>
+
+    <TextView
+        android:id="@+id/horizontal_line_size"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/horizontal_arrow"
-        tools:ignore="ContentDescription"/>
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textColor="@color/colorScale"
+        />
 
-    <ImageView
-        android:id="@+id/horizontal_line_dragger"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="0dp"
-        android:background="@drawable/dragger_circle"
-        tools:ignore="ContentDescription" />
+  </TableRow>
 
-  </LinearLayout>
-</LinearLayout>
+  <TableRow>
+
+    <TextView
+        android:id="@+id/vertical_line_size"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:textColor="@color/colorScale"
+        />
+
+    <RelativeLayout
+        android:id="@+id/lines_frame"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:background="@android:color/transparent">
+
+      <ImageView
+          android:id="@+id/horizontal_line_dragger"
+          android:layout_width="8dp"
+          android:layout_height="8dp"
+          android:layout_alignParentEnd="true"
+          android:background="@drawable/dragger_circle"
+          tools:ignore="ContentDescription"/>
+
+      <ImageView
+          android:id="@+id/vertical_line_dragger"
+          android:layout_width="8dp"
+          android:layout_height="8dp"
+          android:layout_alignParentBottom="true"
+          android:background="@drawable/dragger_circle"
+          tools:ignore="ContentDescription"/>
+
+      <ImageView
+          android:id="@+id/line"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_above="@+id/vertical_line_dragger"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:layout_toStartOf="@+id/horizontal_line_dragger"
+          android:background="@drawable/arrows"
+          tools:ignore="ContentDescription"/>
+
+    </RelativeLayout>
+
+
+  </TableRow>
+</TableLayout>

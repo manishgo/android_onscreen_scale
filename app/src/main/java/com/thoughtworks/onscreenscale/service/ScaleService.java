@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thoughtworks.onscreenscale.R;
@@ -23,10 +23,11 @@ import com.thoughtworks.onscreenscale.util.DisplayUtil;
 public class ScaleService extends Service {
 
   private WindowManager windowManager;
-  private LinearLayout scaleRoot;
-  private TextView txtLineSize;
+  private View scaleRoot;
+  private TextView horizontalLineSize;
   private ImageView line;
-  private LinearLayout lineFrame;
+  private RelativeLayout lineFrame;
+  private TextView verticalLineSize;
 
   @Nullable
   @Override
@@ -39,16 +40,19 @@ public class ScaleService extends Service {
   public void onCreate() {
     super.onCreate();
     windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-    scaleRoot = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_scale, null);
-    txtLineSize = (TextView) scaleRoot.findViewById(R.id.line_size);
-    lineFrame = (LinearLayout) scaleRoot.findViewById(R.id.line_frame);
+    scaleRoot = LayoutInflater.from(this).inflate(R.layout.layout_scale, null);
+    horizontalLineSize = (TextView) scaleRoot.findViewById(R.id.horizontal_line_size);
+    verticalLineSize = (TextView) scaleRoot.findViewById(R.id.vertical_line_size);
+    lineFrame = (RelativeLayout) scaleRoot.findViewById(R.id.lines_frame);
     line = (ImageView) scaleRoot.findViewById(R.id.line);
 
     line.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
       @Override
       public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
-        Integer dp = DisplayUtil.pixelToDp(view.getWidth(), ScaleService.this);
-        txtLineSize.setText(getResources().getString(R.string.size_in_dp, dp));
+        Integer horizontalDp = DisplayUtil.pixelToDp(view.getWidth(), ScaleService.this);
+        horizontalLineSize.setText(getResources().getString(R.string.size_in_dp, horizontalDp));
+        Integer verticalDp = DisplayUtil.pixelToDp(view.getHeight(), ScaleService.this);
+        verticalLineSize.setText(getResources().getString(R.string.size_in_dp, verticalDp));
       }
     });
     LayoutParams layoutParams = createLayoutParams();
@@ -75,6 +79,31 @@ public class ScaleService extends Service {
           case MotionEvent.ACTION_UP:
             initialMotionEventX = 0.0f;
             initialWidth = lineFrameParams.width;
+            return false;
+        }
+        return false;
+      }
+    });
+
+    ImageView verticalLineDragger = (ImageView) scaleRoot.findViewById(R.id.vertical_line_dragger);
+    verticalLineDragger.setOnTouchListener(new View.OnTouchListener() {
+      int initialHeight;
+      float initialMotionEventY;
+
+      @Override
+      public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+          case MotionEvent.ACTION_DOWN:
+            initialHeight = lineFrameParams.height;
+            initialMotionEventY = motionEvent.getRawY();
+            return true;
+          case MotionEvent.ACTION_MOVE:
+            lineFrameParams.height = Math.max(20, initialHeight + (int) (motionEvent.getRawY() - initialMotionEventY));
+            lineFrame.requestLayout();
+            return true;
+          case MotionEvent.ACTION_UP:
+            initialMotionEventY = 0.0f;
+            initialHeight = lineFrameParams.height;
             return false;
         }
         return false;
