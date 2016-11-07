@@ -1,8 +1,8 @@
 package com.thoughtworks.onscreenscale.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,11 +15,6 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Bundle bundle = getIntent().getExtras();
-
-    if(bundle != null && bundle.getString("LAUNCH").equals("YES")) {
-      startService(new Intent(this, ScaleService.class));
-    }
 
     Button launch = (Button)findViewById(R.id.button1);
     launch.setOnClickListener(new View.OnClickListener() {
@@ -39,15 +34,5 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-  }
-
-  @Override
-  protected void onResume() {
-    Bundle bundle = getIntent().getExtras();
-
-    if(bundle != null && bundle.getString("LAUNCH").equals("YES")) {
-      startService(new Intent(this, ScaleService.class));
-    }
-    super.onResume();
   }
 }

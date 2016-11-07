@@ -15,20 +15,20 @@
       tools:ignore="UselessParent">
 
     <ImageView
-        android:orientation="horizontal"
         android:id="@+id/horizontal_line_resize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:orientation="horizontal"
         android:src="@drawable/resize_bg"
         tools:ignore="ContentDescription"/>
 
     <ImageView
-        android:orientation="horizontal"
         android:id="@+id/vertical_line_resize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         android:src="@drawable/resize_bg"
         tools:ignore="ContentDescription"/>
 
@@ -51,6 +51,7 @@
           android:layout_gravity="center_vertical|start"
           android:layout_weight="1"
           android:textColor="@color/colorScale"
+          android:textSize="@dimen/line_size_font_size"
           />
 
       <TextView
@@ -60,6 +61,7 @@
           android:layout_gravity="center_horizontal|top"
           android:layout_weight="1"
           android:textColor="@color/colorScale"
+          android:textSize="@dimen/line_size_font_size"
           />
 
     </LinearLayout>
