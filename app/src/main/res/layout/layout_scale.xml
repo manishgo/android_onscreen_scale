@@ -12,7 +12,7 @@
       android:id="@+id/lines_frame"
       android:layout_width="100dp"
       android:layout_height="120dp"
-      >
+      tools:ignore="UselessParent">
 
     <ImageView
         android:id="@+id/horizontal_line_resize"
@@ -64,12 +64,5 @@
 
   </RelativeLayout>
 
-  <ImageView
-      android:id="@+id/drag"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:layout_gravity="center"
-      android:background="@drawable/drag_icon"
-      tools:ignore="ContentDescription"/>
 </FrameLayout>
 

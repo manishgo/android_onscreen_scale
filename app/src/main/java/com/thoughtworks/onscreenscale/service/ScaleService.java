@@ -63,8 +63,7 @@ public class ScaleService extends Service {
     handleHorizontalResizing(lineFrameParams);
     handleVerticalResizing(lineFrameParams);
 
-    View drag = scaleRoot.findViewById(R.id.drag);
-    drag.setOnTouchListener(new View.OnTouchListener() {
+    line.setOnTouchListener(new View.OnTouchListener() {
       private int initialX;
       private int initialY;
       private float initialTouchX;
