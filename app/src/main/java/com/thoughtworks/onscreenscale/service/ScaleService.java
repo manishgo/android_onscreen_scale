@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -91,7 +90,7 @@ public class ScaleService extends Service {
   }
 
   private void handleHorizontalResizing(final ViewGroup.LayoutParams lineFrameParams) {
-    ImageView horizontalLineResize = (ImageView) scaleRoot.findViewById(R.id.horizontal_line_resize);
+    View horizontalLineResize = scaleRoot.findViewById(R.id.horizontal_line_resize);
     horizontalLineResize.setOnTouchListener(new View.OnTouchListener() {
       int initialWidth;
       float initialMotionEventX;
@@ -118,7 +117,7 @@ public class ScaleService extends Service {
   }
 
   private void handleVerticalResizing(final ViewGroup.LayoutParams lineFrameParams) {
-    ImageView verticalLineResize = (ImageView) scaleRoot.findViewById(R.id.vertical_line_resize);
+    View verticalLineResize = scaleRoot.findViewById(R.id.vertical_line_resize);
     verticalLineResize.setOnTouchListener(new View.OnTouchListener() {
       int initialHeight;
       float initialMotionEventY;

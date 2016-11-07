@@ -10,25 +10,25 @@
 
   <RelativeLayout
       android:id="@+id/lines_frame"
-      android:layout_width="100dp"
+      android:layout_width="120dp"
       android:layout_height="120dp"
       tools:ignore="UselessParent">
 
-    <ImageView
+    <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/horizontal_line_resize"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/dragger_circle"
-        tools:ignore="ContentDescription"/>
+        android:background="@android:color/holo_blue_bright"/>
 
-    <ImageView
+    <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/vertical_line_resize"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/dragger_circle"
-        tools:ignore="ContentDescription"/>
+        android:background="@android:color/holo_blue_bright"/>
 
     <LinearLayout
         android:id="@+id/line"
