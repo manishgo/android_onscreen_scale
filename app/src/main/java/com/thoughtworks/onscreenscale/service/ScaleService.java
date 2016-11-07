@@ -25,7 +25,7 @@ public class ScaleService extends Service {
   private WindowManager windowManager;
   private View scaleRoot;
   private TextView horizontalLineSize;
-  private ImageView line;
+  private View line;
   private RelativeLayout lineFrame;
   private TextView verticalLineSize;
 
@@ -44,7 +44,7 @@ public class ScaleService extends Service {
     horizontalLineSize = (TextView) scaleRoot.findViewById(R.id.horizontal_line_size);
     verticalLineSize = (TextView) scaleRoot.findViewById(R.id.vertical_line_size);
     lineFrame = (RelativeLayout) scaleRoot.findViewById(R.id.lines_frame);
-    line = (ImageView) scaleRoot.findViewById(R.id.line);
+    line = scaleRoot.findViewById(R.id.line);
 
     line.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
       @Override
