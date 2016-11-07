@@ -14,21 +14,23 @@
       android:layout_height="120dp"
       tools:ignore="UselessParent">
 
-    <LinearLayout
+    <ImageView
         android:orientation="horizontal"
         android:id="@+id/horizontal_line_resize"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:background="@android:color/holo_blue_bright"/>
+        android:src="@drawable/resize_bg"
+        tools:ignore="ContentDescription"/>
 
-    <LinearLayout
+    <ImageView
         android:orientation="horizontal"
         android:id="@+id/vertical_line_resize"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_blue_bright"/>
+        android:src="@drawable/resize_bg"
+        tools:ignore="ContentDescription"/>
 
     <LinearLayout
         android:id="@+id/line"
